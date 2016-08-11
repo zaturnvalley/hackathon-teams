@@ -25,4 +25,23 @@ router.get('/:name', function(req, res) {
   res.render('teams/show', { team: team });
 });
 
+//New Routes
+router.delete("/:name", function(req, res){
+  teamService.deleteTeam(req.params.name);
+
+  res.send({message: 'Success'});
+});
+
+router.put("/:name", function (req, res){
+  teamService.editTeam(req.params.name, req.body);
+
+  res.send({message: 'success'});
+});
+
+router.get("/:name/edit", function(req, res){
+  var team = teamService.getTeam(req.params.name);
+
+  res.render("teams/edit", {team: team});
+});
+
 module.exports = router;
